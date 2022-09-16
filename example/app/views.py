@@ -27,8 +27,8 @@ else:
 
 
 def app_index(request):
-    user = get_user_model().objects.get(username='admin')
-    if not hasattr(user, 'backend'):
+    user = get_user_model().objects.get(username="admin")
+    if not hasattr(user, "backend"):
         user.backend = settings.AUTHENTICATION_BACKENDS[0]
     login(request, user)
-    return HttpResponseRedirect(reverse('admin:app_book_change', args=(1,)))
+    return HttpResponseRedirect(reverse("admin:app_book_change", args=(1,)))

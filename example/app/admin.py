@@ -20,7 +20,7 @@ from .models import Book
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'categories', 'tags', 'published_in')
+    list_display = ("title", "categories", "tags", "published_in")
 
 
 admin.site.register(Book, BookAdmin)

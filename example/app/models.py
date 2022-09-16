@@ -20,60 +20,58 @@ from django.utils.translation import gettext as _
 from multiselectfield import MultiSelectField
 
 CATEGORY_CHOICES = (
-    (1, _('Handbooks and manuals by discipline')),
-    (2, _('Business books')),
-    (3, _('Books of literary criticism')),
-    (4, _('Books about literary theory')),
-    (5, _('Books about literature')),
+    (1, _("Handbooks and manuals by discipline")),
+    (2, _("Business books")),
+    (3, _("Books of literary criticism")),
+    (4, _("Books about literary theory")),
+    (5, _("Books about literature")),
 )
 
 ONE = 1
 TWO = 2
-CHAPTER_CHOICES = (
-    (ONE, 'Chapter I'),
-    (TWO, 'Chapter II')
-)
+CHAPTER_CHOICES = ((ONE, "Chapter I"), (TWO, "Chapter II"))
 
 TAGS_CHOICES = (
-    ('sex',         _('Sex')),          # noqa: E241
-    ('work',        _('Work')),         # noqa: E241
-    ('happy',       _('Happy')),        # noqa: E241
-    ('food',        _('Food')),         # noqa: E241
-    ('field',       _('Field')),        # noqa: E241
-    ('boring',      _('Boring')),       # noqa: E241
-    ('interesting', _('Interesting')),  # noqa: E241
-    ('huge',        _('Huge')),         # noqa: E241
-    ('nice',        _('Nice')),         # noqa: E241
+    ("sex", _("Sex")),  # noqa: E241
+    ("work", _("Work")),  # noqa: E241
+    ("happy", _("Happy")),  # noqa: E241
+    ("food", _("Food")),  # noqa: E241
+    ("field", _("Field")),  # noqa: E241
+    ("boring", _("Boring")),  # noqa: E241
+    ("interesting", _("Interesting")),  # noqa: E241
+    ("huge", _("Huge")),  # noqa: E241
+    ("nice", _("Nice")),  # noqa: E241
 )
 
 PROVINCES = (
-    ('AB', _("Alberta")),
-    ('BC', _("British Columbia")),
+    ("AB", _("Alberta")),
+    ("BC", _("British Columbia")),
 )
 
 STATES = (
-    ('AK', _("Alaska")),
-    ('AL', _("Alabama")),
-    ('AZ', _("Arizona")),
+    ("AK", _("Alaska")),
+    ("AL", _("Alabama")),
+    ("AZ", _("Arizona")),
 )
 
 PROVINCES_AND_STATES = (
     (_("Canada - Provinces"), PROVINCES),
-    (_("USA - States"),       STATES),  # noqa: E241
+    (_("USA - States"), STATES),  # noqa: E241
 )
 
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
-    categories = MultiSelectField(choices=CATEGORY_CHOICES,
-                                  max_choices=3,
-                                  # default='1,5')
-                                  default=1)
-    tags = MultiSelectField(choices=TAGS_CHOICES,
-                            null=True, blank=True)
-    published_in = MultiSelectField(_("Province or State"),
-                                    choices=PROVINCES_AND_STATES,
-                                    max_choices=2)
+    categories = MultiSelectField(
+        choices=CATEGORY_CHOICES,
+        max_choices=3,
+        # default='1,5')
+        default=1,
+    )
+    tags = MultiSelectField(choices=TAGS_CHOICES, null=True, blank=True)
+    published_in = MultiSelectField(
+        _("Province or State"), choices=PROVINCES_AND_STATES, max_choices=2
+    )
     chapters = MultiSelectField(choices=CHAPTER_CHOICES, default=ONE)
 
     def __str__(self):

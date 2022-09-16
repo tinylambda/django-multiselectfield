@@ -26,13 +26,17 @@ try:
     def patterns(prefix, *args):
         if VERSION < (1, 9):
             from django.conf.urls import patterns as django_patterns
+
             return django_patterns(prefix, *args)
-        elif prefix != '':
-            raise NotImplementedError("You need to update your URLConf for "
-                                      "Django 1.10, or tweak it to remove the "
-                                      "prefix parameter")
+        elif prefix != "":
+            raise NotImplementedError(
+                "You need to update your URLConf for "
+                "Django 1.10, or tweak it to remove the "
+                "prefix parameter"
+            )
         else:
             return list(args)
+
 except ImportError:  # Django < 1.4
     if VERSION < (1, 4):
         from django.conf.urls.defaults import include, patterns, url
@@ -43,27 +47,27 @@ except ImportError:  # Django < 1.4
 
 
 js_info_dict = {
-    'packages': ('django.conf',),
+    "packages": ("django.conf",),
 }
 
 if VERSION < (1, 11):
     urlpatterns = patterns(
-        '',
-        url(r'^', include('app.urls')),
+        "",
+        url(r"^", include("app.urls")),
     )
     urlpatterns += patterns(
-        '',
-        url(r'^%s(?P<path>.*)$' % settings.MEDIA_URL[1:]),
+        "",
+        url(r"^%s(?P<path>.*)$" % settings.MEDIA_URL[1:]),
     )
 else:
     urlpatterns = [
-        url(r'^', include('app.urls')),
+        url(r"^", include("app.urls")),
         url(
-            r'^%s(?P<path>.*)$' % settings.MEDIA_URL[1:],
+            r"^%s(?P<path>.*)$" % settings.MEDIA_URL[1:],
             serve,
             {
-                'document_root': settings.MEDIA_ROOT,
-                'show_indexes': True,
+                "document_root": settings.MEDIA_ROOT,
+                "show_indexes": True,
             },
         ),
     ]

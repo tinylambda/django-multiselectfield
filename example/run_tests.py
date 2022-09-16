@@ -26,14 +26,15 @@ from django.core.wsgi import get_wsgi_application
 
 
 if len(sys.argv) == 1:
-    os.environ[ENVIRONMENT_VARIABLE] = 'example.settings'
+    os.environ[ENVIRONMENT_VARIABLE] = "example.settings"
 else:
     os.environ[ENVIRONMENT_VARIABLE] = sys.argv[1]
 
 if django.VERSION[0] == 1 and django.VERSION[1] >= 7:
     from django.core.wsgi import get_wsgi_application as get_wsgi_application_v1
+
     application = get_wsgi_application_v1()
 else:
     application = get_wsgi_application()
 
-management.call_command('test', 'app')
+management.call_command("test", "app")
